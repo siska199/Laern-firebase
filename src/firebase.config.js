@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app"; //Create connection
 import { getFirestore } from "firebase/firestore"; //Create connection
-import {getStorage} from "firestore/store"
+import {getStorage} from "firestore/storage"
+
 const firebaseConfig = {
   apiKey: "AIzaSyD5HEdkHqRIEKlaufsjH5nvyy-1hKo_K_A",
   authDomain: "learn-crud-e3a6e.firebaseapp.com",
