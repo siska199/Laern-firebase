@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app"; //Create connection
 import { getFirestore } from "firebase/firestore"; //Create connection
-import {getStorage} from "firestore/storage"
+import {getStorage} from "firebase/storage"
 
 const firebaseConfig = {
   apiKey: "AIzaSyD5HEdkHqRIEKlaufsjH5nvyy-1hKo_K_A",
@@ -14,4 +14,5 @@ const firebaseConfig = {
 const app = getApps.length>0?getApp():initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const storage = getStorage(app)
+
 export {app, db, storage}
