@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytesResumable,
+  listAll,
+  getDownloadURL,
+} from "firebase/storage";
 import { storage } from "./firebase.config";
-
+//Referensi : https://firebase.google.com/docs/storage/web/upload-files
 function App() {
   const [imageUpload, setImageUpload] = useState();
   const [imageList, setImageList] = useState([]);
@@ -29,9 +34,8 @@ function App() {
     e.preventDefault();
     console.log("file: ", imageUpload);
     const imageRef = ref(storage, `images/${imageUpload.name + Date.now()}`);
-    uploadBytes(imageRef, imageUpload).then((res) => {
-      console.log("success");
-      setUpSucess(!upSucces);
+    uploadBytesResumable(imageRef, imageUpload).on("state_changed", (snap) => {
+      console.log(snap);
     });
   };
 
