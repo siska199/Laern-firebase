@@ -33,6 +33,7 @@ function App() {
   const handleUploadFoto = async (e) => {
     e.preventDefault();
     console.log("file: ", imageUpload);
+    
     const imageRef = ref(storage, `images/${imageUpload.name + Date.now()}`);
     const uploadTask = uploadBytesResumable(imageRef, imageUpload);
     uploadTask.on("state_changed", (snap) => {
@@ -44,6 +45,8 @@ function App() {
         });
       }
     });
+
+    
   };
 
   return (
