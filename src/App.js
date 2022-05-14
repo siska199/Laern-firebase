@@ -14,7 +14,7 @@ function App() {
   //Fetch all photos:
   useEffect(() => {
     handleGetFotos();
-  }, [upSucces]);
+  }, []);
   const imagesRef = ref(storage, "images/");
 
   const handleGetFotos = async () => {
@@ -34,8 +34,15 @@ function App() {
     e.preventDefault();
     console.log("file: ", imageUpload);
     const imageRef = ref(storage, `images/${imageUpload.name + Date.now()}`);
-    uploadBytesResumable(imageRef, imageUpload).on("state_changed", (snap) => {
-      console.log(snap);
+    const uploadTask = uploadBytesResumable(imageRef, imageUpload);
+    uploadTask.on("state_changed", (snap) => {
+      console.log("snap",snap);
+      if(snap.bytesTransferred==snap.totalBytes){
+        console.log("done")
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          setImageList((prev) => [...prev, url]);
+        });
+      }
     });
   };
 
